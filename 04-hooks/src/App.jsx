@@ -1,34 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React, { useState } from 'react'
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
 
+    const [user, setuser] = useState({user : "Arun", age:30 })
+
+    // const btnClicked = ()=> {
+    //     const newUser = {...user}
+
+    // }
+
+    const [num, setnum] = useState(0)
+
+    const btnClicked = ()=> {
+        setnum(prev=> (prev+1)) // this is called batch updates
+        setnum(prev=> (prev+1))
+        // setnum(num+1)
+        // setnum(num+1)
+
+        setuser(prev => ({ // this is there for the objects
+          ...prev,
+          age: prev.age+1
+        }))
+        console.log(age)
+    }
+
+    const changeName = ()=> {
+        const newUser = {...user}
+        newUser.user = "Yash"
+        setuser(newUser)
+    }
+ 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <div className='h-screen bg-amber-200 w-full'>
+        <h2>My name is {user.user}</h2>
+        <button onClick={changeName} className='bg-black text-white p-4 rounded-3xl mt-20'>Click me and change</button>
+        <h1>{num}</h1>
+        <button onClick={btnClicked} className='bg-black text-white p-4 rounded-3xl ml-2'>inc {user.age}</button>
+    </div>
   )
 }
 
